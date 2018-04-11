@@ -1,2 +1,2 @@
 # R-programming
-[link to dashboard demo](./dashboard.png)
+![Image of dashboard demo](./dashboard.png)
