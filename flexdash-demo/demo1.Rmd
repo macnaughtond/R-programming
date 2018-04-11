@@ -1,0 +1,43 @@
+---
+title: "Truck Delays Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+editor_options: 
+  chunk_output_type: inline
+
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(flexdashboard)
+library(ggplot2)
+data<-read.csv("/home/david/Desktop/flexdash-demo/delays_cost.csv",header=TRUE, sep=",")
+location<-read.csv("/home/david/Desktop/flexdash-demo/locations.csv",header=TRUE,sep=",")
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### CAUSE LOCATIONS
+```{r}
+pie(location$PCNT, labels=location$SUPPLIER, radius = 1, col = rainbow(length(location$PCNT)))
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### VALUES
+
+```{r qplot, fig.width=4, fig.height=3,message=FALSE}
+head(data)
+```
+
+### TREND
+
+```{r}
+barplot(data$Cost, xlab = "Month", ylab="Lost Time (min)", names.arg = data$Month, col="blue")
+```
+
